@@ -1,14 +1,21 @@
 package com.qhwy.getway.entity;
 
 public class User {
-	private String userName;
+	private String loginName;
 	private String passWord;
-	private String credentialsSalt;
-	public String getUserName() {
-		return userName;
+	private String salt;
+	
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 	public String getPassWord() {
 		return passWord;
@@ -16,11 +23,13 @@ public class User {
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
+	/**
+	 * 认证加密的盐
+	 * 
+	 * @return
+	 */
 	public String getCredentialsSalt() {
-		return credentialsSalt;
-	}
-	public void setCredentialsSalt(String credentialsSalt) {
-		this.credentialsSalt = credentialsSalt;
+		return loginName + salt;
 	}
 	
 	

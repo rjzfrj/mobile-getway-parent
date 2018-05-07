@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Set<String> findPermissionsByUserName(String username) {
 		Set<String> set=new HashSet<String>();
-		set.add("index");
+		set.add("pms:card:add");
+		set.add("pms:listMain:view");
 		return set;
 	}
 
@@ -31,9 +32,9 @@ public class UserServiceImpl implements UserService {
 		User user=new User();
 		if("test".equals(username)){
 			
-			user.setUserName("test");
-			user.setPassWord("123456");
-			user.setCredentialsSalt("888");
+			user.setLoginName("test");
+			user.setPassWord("3362d681c3834ec5794ba1c1b3807c27");
+			user.setSalt("888888");
 		}
 		return user;
 	}

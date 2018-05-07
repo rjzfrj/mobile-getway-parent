@@ -83,7 +83,7 @@ public class UserRealm extends AuthorizingRealm {
 			throw new UnknownAccountException();// 没找到帐号
 		}
      // 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-     		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(), // 登录名
+     		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getLoginName(), // 登录名
      				user.getPassWord(), // 密码
      				ByteSource.Util.bytes(user.getCredentialsSalt()), // salt=username+salt
      				getName() // realm name
