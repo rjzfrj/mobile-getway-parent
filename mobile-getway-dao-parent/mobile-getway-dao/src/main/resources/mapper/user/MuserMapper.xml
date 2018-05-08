@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qhwy.mgetway.dao.user.MuserMapper" >
+  <resultMap id="BaseResultMap" type="com.qhwy.mgetway.entity.user.Muser" >
+    <id column="U_ID" property="uId" jdbcType="DECIMAL" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="PSSSWORD" property="psssword" jdbcType="VARCHAR" />
+    <result column="MOBILE_REFERENCE" property="mobileReference" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    U_ID, LOGIN_NAME, PSSSWORD, MOBILE_REFERENCE
+  </sql>
+  <select id="selectByLoginName" resultMap="BaseResultMap" parameterType="string" >
+    select 
+    <include refid="Base_Column_List" />
+    from M_USER
+    where LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from M_USER
+    where U_ID = #{uId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from M_USER
+    where U_ID = #{uId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.qhwy.mgetway.entity.user.Muser" keyProperty="uId" useGeneratedKeys="true" >
+  	<selectKey keyProperty="uId" order="BEFORE" resultType="java.lang.Long" >
+  		SELECT SEQ_MUSER_ID.NEXTVAL AS U_ID FROM DUAL
+  	</selectKey>
+    insert into M_USER (U_ID, LOGIN_NAME, PSSSWORD, 
+      MOBILE_REFERENCE)
+    values (#{uId,jdbcType=DECIMAL}, #{loginName,jdbcType=VARCHAR}, #{psssword,jdbcType=VARCHAR}, 
+      #{mobileReference,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qhwy.mgetway.entity.user.Muser" >
+    insert into M_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        U_ID,
+      </if>
+      <if test="loginName != null" >
+        LOGIN_NAME,
+      </if>
+      <if test="psssword != null" >
+        PSSSWORD,
+      </if>
+      <if test="mobileReference != null" >
+        MOBILE_REFERENCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=DECIMAL},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="psssword != null" >
+        #{psssword,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileReference != null" >
+        #{mobileReference,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qhwy.mgetway.entity.user.Muser" >
+    update M_USER
+    <set >
+      <if test="loginName != null" >
+        LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="psssword != null" >
+        PSSSWORD = #{psssword,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileReference != null" >
+        MOBILE_REFERENCE = #{mobileReference,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where U_ID = #{uId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qhwy.mgetway.entity.user.Muser" >
+    update M_USER
+    set LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      PSSSWORD = #{psssword,jdbcType=VARCHAR},
+      MOBILE_REFERENCE = #{mobileReference,jdbcType=VARCHAR}
+    where U_ID = #{uId,jdbcType=DECIMAL}
+  </update>
+</mapper>

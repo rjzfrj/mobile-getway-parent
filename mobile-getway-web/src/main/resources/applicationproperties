@@ -1,0 +1,10 @@
+server.port=8083
+server.servlet-path=/getway
+#\u914d\u7f6e\u9759\u6001\u8d44\u6e90
+#spring.resources.static-locations=classpath:/public/
+
+
+#logging.level.org.springframework=DEBUG
+
+spring.mvc.view.prefix=/WEB-INF/view/
+spring.mvc.view.suffix=.jsp
